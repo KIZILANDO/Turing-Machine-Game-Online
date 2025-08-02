@@ -80,67 +80,52 @@ function Question(ver, guess, col) {
 }
 function extractNumbers() {
     const generateUUID = () => {
-    let e = new Date().getTime();
-    let t = (typeof performance !== "undefined" && performance.now && 1e3 * performance.now()) || 0;
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (n) {
-      let r = 16 * Math.random();
-      if (e > 0) {
-        r = (e + r) % 16 | 0;
-        e = Math.floor(e / 16);
-      } else {
-        r = (t + r) % 16 | 0;
-        t = Math.floor(t / 16);
-      }
-      return (n === "x" ? r : (r & 0x3) | 0x8).toString(16);
-    });
-  };
+        let e = new Date().getTime();
+        let t = (typeof performance !== "undefined" && performance.now && 1e3 * performance.now()) || 0;
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (n) {
+            let r = 16 * Math.random();
+            if (e > 0) {
+                r = (e + r) % 16 | 0;
+                e = Math.floor(e / 16);
+            } else {
+                r = (t + r) % 16 | 0;
+                t = Math.floor(t / 16);
+            }
+            return (n === "x" ? r : (r & 0x3) | 0x8).toString(16);
+        });
+    };
+    
     window.turing_game_uuid = window.turing_game_uuid || generateUUID();
     console.log("Generating UUID:", window.turing_game_uuid);
+    //const idGame = prompt("ID of the Problem:").replace('#', '');
 
-    fetch(`https://turingmachine.info/api/api.php?h=${encodeURIComponent("B5V VGO")}&uuid=${window.turing_game_uuid}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === "ok") {
-          console.log("Réponse OK :", data);
-          // utiliser les données reçues (data.fake, data.ind, etc.)
-        } else if (data.status === "bad") {
-          console.error("Hash incorrect !");
-        }
-      })
-      .catch(err => {
-        console.error("Erreur réseau :", err);
-      });
-    const userText = prompt("Paste the problem here:");
-    var text = userText;
-
-    //const codeElement = document.querySelectorAll("h2"); // Select a header containing the code on the page
-    var codeText = ""
-
-    // Extract all relevant numbers and format them
-    const numbersRegex = />\d{1,3}/g;
-    const numbersMatches = text.match(numbersRegex);
-    const numbers = [];
-    for (let i = 0; i < numbersMatches.length; i++) {
-        numbers.push(parseInt(numbersMatches[i].slice(1)));
-    }
-    const verifiers = [];
-    const criteria = [];
-    for (let i = 0; i < numbers.length; i++) {
-        number = numbers[i];
-        if (number < 50) {
-            criteria.push(number);
-        } else {
-            verifiers.push(number);
-        }
-    }
-    // Extract the colour and format it 
-    const colourRegex = /crypt color(\d+)/g;
-    const colour = parseInt(text.match(colourRegex)[0].slice(-1));
-
-    // Extract the code and format it 
-
-    let info = { verifiers: verifiers, criteria: criteria, colour: colour, code: "" };
-    return info;
+    return fetch(`http://localhost:3001/proxy?uuid=${window.turing_game_uuid}`, {})
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "ok") {
+                console.log("Réponse OK :", data);
+                let info = { 
+                    verifiers: data.law, 
+                    criteria: data.ind, 
+                    colour: data.color, 
+                    code: data.hash
+                };
+                console.log(info);
+                return info;
+            } else if (data.status === "bad") {
+                console.error("Hash incorrect !");
+                throw new Error("Hash incorrect");
+            }
+        })
+        .catch(err => {
+            console.error("Erreur réseau :", err);
+            return {
+                verifiers: [387, 293, 537, 315, 516],
+                criteria: [3, 14, 17, 19, 20],
+                colour: 0,
+                code: idGame || "DEFAULT"
+            };
+        });
 }
 
 // Loads the images for the criteria
@@ -236,261 +221,274 @@ function loadCriteria(criteriaNumbers, Reference) {
 document.addEventListener("DOMContentLoaded", function () {
     
     const notesheet = document.getElementById("notesheet-img");
-    let info = extractNumbers();
-
-    let ver = info.verifiers[0];
-    let guessCount = 0;
-    let lastGuessWithVerifier = "";
-
-    // Insert code visually
-    const code = document.getElementById("Code");
-    code.innerText = info.code;
-    code.style.position = "absolute";
-    code.style.left = (notesheet.offsetLeft + 400) + "px";
-    code.style.top = (notesheet.offsetTop + 36) + "px";
-    const name = document.getElementById("Name");
-    name.innerText = "KIZILANDO";
-    name.style.position = "absolute";
-    name.style.left = (notesheet.offsetLeft + 400) + "px";
-    name.style.top = (notesheet.offsetTop + 6) + "px";
     
-    function addGuessToGrid(guess) {
-        if (guess.length !== 3 || guessCount >= 9) return false;
+    // Utiliser extractNumbers() de manière asynchrone
+    extractNumbers().then(info => {
+        let ver = info.verifiers[0];
+        let guessCount = 0;
+        let lastGuessWithVerifier = "";
+
+        // Insert code visually
+        const code = document.getElementById("Code");
+        code.innerText = info.code;
+        code.style.position = "absolute";
+        code.style.left = (notesheet.offsetLeft + 400) + "px";
+        code.style.top = (notesheet.offsetTop + 36) + "px";
+        const name = document.getElementById("Name");
+        name.innerText = "KIZILANDO";
+        name.style.position = "absolute";
+        name.style.left = (notesheet.offsetLeft + 400) + "px";
+        name.style.top = (notesheet.offsetTop + 6) + "px";
         
-        const digit1 = guess[0]
-        const digit2 = guess[1];
-        const digit3 = guess[2];
-        
-        const baseLeft = notesheet.offsetLeft + 87;
-        const baseTop = notesheet.offsetTop + 147; 
-        const columnWidth = 32;
-        const rowHeight = 27;
-        
-        const positions = [
-            { digit: digit1, left: baseLeft, color: '#57b3db' },
-            { digit: digit2, left: baseLeft + columnWidth, color: '#fdbb10' },
-            { digit: digit3, left: baseLeft + columnWidth * 2, color: '#7e66ad' }
-        ];
-        
-        positions.forEach((pos, index) => {
-            const digitElement = document.createElement('div');
-            digitElement.textContent = pos.digit;
-            digitElement.style.position = 'absolute';
-            digitElement.style.left = pos.left - 18 + 'px';
-            digitElement.style.top = (baseTop + rowHeight * guessCount) - 72+ 'px';
-            digitElement.style.fontFamily = 'Arial, sans-serif';
-            digitElement.style.fontSize = '16px';
-            digitElement.style.fontWeight = 'bold';
-            digitElement.style.color = pos.color;
-            digitElement.style.textAlign = 'center';
-            digitElement.style.width = '20px';
-            digitElement.style.zIndex = '10';
-            digitElement.id = `guess-${guessCount}-digit-${index}`;
+        function addGuessToGrid(guess) {
+            if (guess.length !== 3 || guessCount >= 9) return false;
             
-            document.body.appendChild(digitElement);
+            const digit1 = guess[0]
+            const digit2 = guess[1];
+            const digit3 = guess[2];
+            
+            const baseLeft = notesheet.offsetLeft + 87;
+            const baseTop = notesheet.offsetTop + 147; 
+            const columnWidth = 32;
+            const rowHeight = 27;
+            
+            const positions = [
+                { digit: digit1, left: baseLeft, color: '#57b3db' },
+                { digit: digit2, left: baseLeft + columnWidth, color: '#fdbb10' },
+                { digit: digit3, left: baseLeft + columnWidth * 2, color: '#7e66ad' }
+            ];
+            
+            positions.forEach((pos, index) => {
+                const digitElement = document.createElement('div');
+                digitElement.textContent = pos.digit;
+                digitElement.style.position = 'absolute';
+                digitElement.style.left = pos.left - 18 + 'px';
+                digitElement.style.top = (baseTop + rowHeight * guessCount) - 72+ 'px';
+                digitElement.style.fontFamily = 'Arial, sans-serif';
+                digitElement.style.fontSize = '16px';
+                digitElement.style.fontWeight = 'bold';
+                digitElement.style.color = pos.color;
+                digitElement.style.textAlign = 'center';
+                digitElement.style.width = '20px';
+                digitElement.style.zIndex = '10';
+                digitElement.id = `guess-${guessCount}-digit-${index}`;
+                
+                document.body.appendChild(digitElement);
+            });
+            
+            guessCount++;
+            return true;
+        }
+
+        // Wait a bit for the page to be fully rendered
+        setTimeout(() => {
+            loadCriteria(info.criteria, notesheet);
+        }, 100);
+        
+        function addResultToGrid(isCorrect, verifierIndex, currentGuessRow) {
+            const existingResult = document.getElementById(`result-${currentGuessRow}-verifier-${verifierIndex}`);
+            if (existingResult) {
+                existingResult.remove();
+            }
+            const baseLeft = notesheet.offsetLeft + 218;
+            const baseTop = notesheet.offsetTop + 147;
+            const columnWidth = 32;
+            const rowHeight = 27;
+            const columnAdjustments = [
+            -30,
+            -29,
+            -28.5,
+            -28,
+            -27,
+            -26
+        ];
+            
+            const resultElement = document.createElement('img');
+            resultElement.src = isCorrect ? "img/other/t.png" : "img/other/x.png";
+            resultElement.style.position = 'absolute';
+            resultElement.style.left = (baseLeft + columnWidth * verifierIndex + columnAdjustments[verifierIndex]) + 'px';
+            resultElement.style.top = (baseTop + rowHeight * currentGuessRow - 72) + 'px';
+            resultElement.style.width = '16px';
+            resultElement.style.height = '16px';
+            resultElement.style.zIndex = '10';
+            resultElement.crossOrigin = "anonymous";
+            resultElement.id = `result-${currentGuessRow}-verifier-${verifierIndex}`;
+            
+            document.body.appendChild(resultElement);
+        }
+
+        // Add canvas
+        let canvas = document.getElementById('draw-canvas');
+        canvas.style.position = "absolute";
+        canvas.style.left = "370px";
+        canvas.style.top = "120px";
+        canvas.width="150";
+        canvas.height="230";
+        const ctx = canvas.getContext('2d');
+
+        let isDrawing = false;
+        let lastX, lastY;
+
+        const clearBtn = document.getElementById('clear-canvas');
+        clearBtn.addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < guessCount; i++) {
+                for (let j = 0; j < 3; j++) {
+                    const element = document.getElementById(`guess-${i}-digit-${j}`);
+                    if (element) {
+                        element.remove();
+                    }
+                }
+                for (let k = 0; k < 6; k++) {
+                    const resultElement = document.getElementById(`result-${i}-verifier-${k}`);
+                    if (resultElement) {
+                        resultElement.remove();
+                    }
+                }
+            }
+            guessCount = 0;
+            lastGuessWithVerifier = "";
         });
-        
-        guessCount++;
-        return true;
-    }
 
-    // Wait a bit for the page to be fully rendered
-    setTimeout(() => {
-        loadCriteria(info.criteria, notesheet);
-    }, 100);
-    
-    function addResultToGrid(isCorrect, verifierIndex, currentGuessRow) {
-        const existingResult = document.getElementById(`result-${currentGuessRow}-verifier-${verifierIndex}`);
-        if (existingResult) {
-            existingResult.remove();
-        }
-        const baseLeft = notesheet.offsetLeft + 218;
-        const baseTop = notesheet.offsetTop + 147;
-        const columnWidth = 32;
-        const rowHeight = 27;
-        const columnAdjustments = [
-        -30,
-        -29,
-        -28.5,
-        -28,
-        -27,
-        -26
-    ];
-        
-        const resultElement = document.createElement('img');
-        resultElement.src = isCorrect ? "img/other/t.png" : "img/other/x.png";
-        resultElement.style.position = 'absolute';
-        resultElement.style.left = (baseLeft + columnWidth * verifierIndex + columnAdjustments[verifierIndex]) + 'px';
-        resultElement.style.top = (baseTop + rowHeight * currentGuessRow - 72) + 'px';
-        resultElement.style.width = '16px';
-        resultElement.style.height = '16px';
-        resultElement.style.zIndex = '10';
-        resultElement.crossOrigin = "anonymous";
-        resultElement.id = `result-${currentGuessRow}-verifier-${verifierIndex}`;
-        
-        document.body.appendChild(resultElement);
-    }
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+            ctx.beginPath();
+            ctx.fillStyle = "black";
+            ctx.arc(e.offsetX, e.offsetY, 2, 0, 2 * Math.PI);
+            ctx.fill();
+        });
 
-    // Add canvas
-    let canvas = document.getElementById('draw-canvas');
-    canvas.style.position = "absolute";
-    canvas.style.left = "370px";
-    canvas.style.top = "120px";
-    canvas.width="150";
-    canvas.height="230";
-    const ctx = canvas.getContext('2d');
-
-    let isDrawing = false;
-    let lastX, lastY;
-
-    const clearBtn = document.getElementById('clear-canvas');
-    clearBtn.addEventListener('click', () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = 0; i < guessCount; i++) {
-            for (let j = 0; j < 3; j++) {
-                const element = document.getElementById(`guess-${i}-digit-${j}`);
-                if (element) {
-                    element.remove();
-                }
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            if (e.clientX - rect.left < 0 || e.clientX - rect.left > rect.width || e.clientY - rect.top < 0 || e.clientY - rect.top > rect.height) {
+                isDrawing = false;
+                return;
             }
-            for (let k = 0; k < 6; k++) {
-                const resultElement = document.getElementById(`result-${i}-verifier-${k}`);
-                if (resultElement) {
-                    resultElement.remove();
-                }
-            }
-        }
-        guessCount = 0;
-        lastGuessWithVerifier = "";
-    });
 
-    canvas.addEventListener('mousedown', (e) => {
-        isDrawing = true;
-        lastX = e.offsetX;
-        lastY = e.offsetY;
-        ctx.beginPath();
-        ctx.fillStyle = "black";
-        ctx.arc(e.offsetX, e.offsetY, 2, 0, 2 * Math.PI);
-        ctx.fill();
-    });
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 5;
+            ctx.stroke();
 
-    canvas.addEventListener('mousemove', (e) => {
-        if (!isDrawing) return;
-        const rect = canvas.getBoundingClientRect();
-        if (e.clientX - rect.left < 0 || e.clientX - rect.left > rect.width || e.clientY - rect.top < 0 || e.clientY - rect.top > rect.height) {
+            ctx.beginPath();
+            ctx.fillStyle = "black";
+            ctx.arc(lastX, lastY, 2, 0, 2 * Math.PI);
+            ctx.fill();
+
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+        });
+
+        canvas.addEventListener('mouseup', () => {
             isDrawing = false;
-            return;
-        }
+        });
 
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 5;
-        ctx.stroke();
+        // Save functionality
+        document.getElementById('save-canvas').addEventListener('click', function () {
+            try {
+                html2canvas(document.body, {
+                    allowTaint: true,
+                    useCORS: true,
+                    scale: 1,
+                    logging: true,
+                    proxy: window.location.origin + "/proxy",
+                    foreignObjectRendering: false,
+                    imageTimeout: 15000,
+                    removeContainer: true
+                }).then(function (screenshotCanvas) {
+                    const imgData = screenshotCanvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    const filename = (info?.code || 'capture') + ".png";
+                    
+                    link.download = filename;
+                    link.href = imgData;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }).catch(function(error) {
+                    console.error('html2canvas error:', error);
+                    fallbackSave();
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                fallbackSave();
+            }
+        });
 
-        ctx.beginPath();
-        ctx.fillStyle = "black";
-        ctx.arc(lastX, lastY, 2, 0, 2 * Math.PI);
-        ctx.fill();
-
-        lastX = e.offsetX;
-        lastY = e.offsetY;
-    });
-
-    canvas.addEventListener('mouseup', () => {
-        isDrawing = false;
-    });
-
-    // Save functionality
-    document.getElementById('save-canvas').addEventListener('click', function () {
-        try {
-            html2canvas(document.body, {
-                allowTaint: true,
-                useCORS: true,
-                scale: 1,
-                logging: true,
-                proxy: window.location.origin + "/proxy",
-                foreignObjectRendering: false,
-                imageTimeout: 15000,
-                removeContainer: true
-            }).then(function (screenshotCanvas) {
-                const imgData = screenshotCanvas.toDataURL('image/png');
+        function fallbackSave() {
+            try {
+                const canvas = document.getElementById('draw-canvas');
+                const imgData = canvas.toDataURL('image/png');
                 const link = document.createElement('a');
-                const filename = (info?.code || 'capture') + ".png";
+                const filename = (info?.code || 'capture') + "_drawing.png";
                 
                 link.download = filename;
                 link.href = imgData;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-            }).catch(function(error) {
-                console.error('html2canvas error:', error);
-                fallbackSave();
-            });
-        } catch (error) {
-            console.error('Error:', error);
-            fallbackSave();
-        }
-    });
-
-    function fallbackSave() {
-        try {
-            const canvas = document.getElementById('draw-canvas');
-            const imgData = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            const filename = (info?.code || 'capture') + "_drawing.png";
-            
-            link.download = filename;
-            link.href = imgData;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            alert('Sauvegarde du dessin uniquement (problème avec les images)');
-        } catch (error) {
-            alert('Impossible de sauvegarder: ' + error.message);
-        }
-    }
-
-    const verifierElement = document.getElementById("verifier-select");
-    verifierElement.addEventListener('change', () => {
-        ver = info.verifiers[verifierElement.value];
-    });
-
-    const guessElement = document.getElementById("guess");
-    const submitElement = document.getElementById("submit-button");
-    submitElement.addEventListener("click", () => {
-        let guess = guessElement.value;
-        
-        if (guess.length === 3 && /^[1-5]{3}$/.test(guess)) {
-            const verifierIndex = parseInt(verifierElement.value);
-            const currentGuessWithVerifier = guess + "-" + verifierIndex;
-            
-            if (currentGuessWithVerifier === lastGuessWithVerifier) {
-                console.log("Même guess avec même verifier, ignoré:", currentGuessWithVerifier);
-                return;
+                
+                alert('Sauvegarde du dessin uniquement (problème avec les images)');
+            } catch (error) {
+                alert('Impossible de sauvegarder: ' + error.message);
             }
-            
-            let guessAdded = false;
-            if (!lastGuessWithVerifier.startsWith(guess + "-")) {
-                const previousGuessCount = guessCount;
-                guessAdded = addGuessToGrid(guess);
-            }
-            
-            let Ans = Question(ver, guess, info.colour);
-            
-            const currentRow = guessAdded ? guessCount - 1 : Math.floor(guessCount - 1);
-            addResultToGrid(Ans > 0, verifierIndex, currentRow);
-            
-            document.getElementById("Ans").src = Ans ? "img/other/t.png" : "img/other/x.png";
-            
-            lastGuessWithVerifier = currentGuessWithVerifier;
-            
-        } else {
-            let Ans = Question(ver, guess, info.colour);
-            document.getElementById("Ans").src = Ans ? "img/other/t.png" : "img/other/x.png";
         }
+
+        const verifierElement = document.getElementById("verifier-select");
+        verifierElement.addEventListener('change', () => {
+            ver = info.verifiers[verifierElement.value];
+        });
+
+        const guessElement = document.getElementById("guess");
+        const submitElement = document.getElementById("submit-button");
+        submitElement.addEventListener("click", () => {
+            let guess = guessElement.value;
+            
+            if (guess.length === 3 && /^[1-5]{3}$/.test(guess)) {
+                const verifierIndex = parseInt(verifierElement.value);
+                const currentGuessWithVerifier = guess + "-" + verifierIndex;
+                
+                if (currentGuessWithVerifier === lastGuessWithVerifier) {
+                    console.log("Même guess avec même verifier, ignoré:", currentGuessWithVerifier);
+                    return;
+                }
+                
+                let guessAdded = false;
+                if (!lastGuessWithVerifier.startsWith(guess + "-")) {
+                    const previousGuessCount = guessCount;
+                    guessAdded = addGuessToGrid(guess);
+                }
+                
+                let Ans = Question(ver, guess, info.colour);
+                
+                const currentRow = guessAdded ? guessCount - 1 : Math.floor(guessCount - 1);
+                addResultToGrid(Ans > 0, verifierIndex, currentRow);
+                
+                document.getElementById("Ans").src = Ans ? "img/other/t.png" : "img/other/x.png";
+                
+                lastGuessWithVerifier = currentGuessWithVerifier;
+                
+            } else {
+                let Ans = Question(ver, guess, info.colour);
+                document.getElementById("Ans").src = Ans ? "img/other/t.png" : "img/other/x.png";
+            }
+        });
+
+    }).catch(error => {
+        console.error("Erreur lors de l'extraction des données:", error);
+        // Fallback avec des données par défaut
+        const info = {
+            verifiers: [387, 293, 537, 315, 516],
+            criteria: [3, 14, 17, 19, 20],
+            colour: 0,
+            code: "DEFAULT"
+        };
+        // Répéter le même code d'initialisation ici ou créer une fonction
     });
 });
