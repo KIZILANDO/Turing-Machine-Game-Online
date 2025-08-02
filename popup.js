@@ -79,25 +79,11 @@ function Question(ver, guess, col) {
     return Ans;
 }
 function extractNumbers() {
-    fetch('https://corsproxy.io/?https://turingmachine.info/api/api.php?uuid=ce9773e4-9bd2-417f-aaf5-1618cd8e07fd&m=0&d=1&n=5', {
-        method: 'GET',
-        headers: {
-            'Referer': 'https://www.turingmachine.info'        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json(); // suppose que la réponse est au format JSON
-    })
-    .then(data => {
-        console.log(data); // tu peux faire console.log(data.quelqueChose) si tu veux extraire une partie
-        const codeText = "code"; // tu peux l’utiliser ici si besoin
-    });
-    var text = '<div class="row"><div class=" cell spot">a</div><div class="cell criteria"><div class="criteria"><span class="square green">3</span></div></div><div class="cell"><span class="crypt color0">387</span></div></div><div class="row"><div class=" cell spot">b</div><div class="cell criteria"><div class="criteria"><span class="square green">14</span></div></div><div class="cell"><span class="crypt color0">293</span></div></div><div class="row"><div class=" cell spot">c</div><div class="cell criteria"><div class="criteria"><span class="square green">17</span></div></div><div class="cell"><span class="crypt color0">537</span></div></div><div class="row"><div class=" cell spot">d</div><div class="cell criteria"><div class="criteria"><span class="square green">19</span></div></div><div class="cell"><span class="crypt color0">315</span></div></div><div class="row"><div class=" cell spot">e</div><div class="cell criteria"><div class="criteria"><span class="square green">20</span></div></div><div class="cell"><span class="crypt color0">516</span></div></div>'
+    const userText = prompt("Paste the problem here:");
+    var text = userText;
 
     //const codeElement = document.querySelectorAll("h2"); // Select a header containing the code on the page
-    var codeText = "code"
+    var codeText = ""
 
     // Extract all relevant numbers and format them
     const numbersRegex = />\d{1,3}/g;
@@ -122,7 +108,7 @@ function extractNumbers() {
 
     // Extract the code and format it 
 
-    let info = { verifiers: verifiers, criteria: criteria, colour: colour, code: "code" };
+    let info = { verifiers: verifiers, criteria: criteria, colour: colour, code: "" };
     return info;
 }
 
@@ -219,14 +205,6 @@ function loadCriteria(criteriaNumbers, Reference) {
 document.addEventListener("DOMContentLoaded", function () {
     
     const notesheet = document.getElementById("notesheet-img");
-
-    // Replace this with a real fetch / static object
-    //let info = {
-    //    criteria: [4, 7, 9, 14, 19],
-    //    verifiers: [577, 355, 369, 418, 257],
-    //    colour: 1,
-    //    code: "ABC123"
-    //};
     let info = extractNumbers();
 
     let ver = info.verifiers[0];
@@ -305,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
         -28.5,
         -28,
         -27,
-        -27
+        -26
     ];
         
         const resultElement = document.createElement('img');
