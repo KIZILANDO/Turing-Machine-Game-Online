@@ -105,7 +105,7 @@ function extractNumbers() {
             if (data.status === "ok") {
                 console.log("Réponse OK :", data);
                 let info = { 
-                    verifiers: data.law, 
+                    verifiers: data.crypt, 
                     criteria: data.ind, 
                     colour: data.color, 
                     code: data.hash
@@ -460,7 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 let guessAdded = false;
                 if (!lastGuessWithVerifier.startsWith(guess + "-")) {
-                    const previousGuessCount = guessCount;
                     guessAdded = addGuessToGrid(guess);
                 }
                 
