@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
         
         const resultElement = document.createElement('img');
-        resultElement.src = isCorrect ? "img/other/t.PNG" : "img/other/x.PNG";
+        resultElement.src = isCorrect ? "img/other/t.png" : "img/other/x.png";
         resultElement.style.position = 'absolute';
         resultElement.style.left = (baseLeft + columnWidth * verifierIndex + columnAdjustments[verifierIndex]) + 'px';
         resultElement.style.top = (baseTop + rowHeight * currentGuessRow - 72) + 'px';
@@ -475,13 +475,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const currentRow = guessAdded ? guessCount - 1 : Math.floor(guessCount - 1);
             addResultToGrid(Ans > 0, verifierIndex, currentRow);
             
-            document.getElementById("Ans").src = Ans ? "img/other/t.PNG" : "img/other/x.PNG";
+            document.getElementById("Ans").src = Ans ? "img/other/t.png" : "img/other/x.png";
             
             lastGuessWithVerifier = currentGuessWithVerifier;
             
         } else {
             let Ans = Question(ver, guess, info.colour);
-            document.getElementById("Ans").src = Ans ? "img/other/t.PNG" : "img/other/x.PNG";
+            document.getElementById("Ans").src = Ans ? "img/other/t.png" : "img/other/x.png";
         }
     });
 });
