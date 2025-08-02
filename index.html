@@ -3,6 +3,7 @@
 <head>
     <title>Number Extractor Extension</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
+    <script src="config.js"></script>
     <script src="popup.js"></script>
     <script src="html2canvas.min.js"></script>
 </head>
@@ -38,6 +39,16 @@
             
             </div>
         </div>
+        <div id="version-info" style="position: fixed; bottom: 5px; right: 5px; font-size: 10px; color: #888; font-family: Arial, sans-serif;">
+            v<span id="version-number"></span>
+        </div>
     </div>
+
+    <script>
+        // Afficher la version
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('version-number').textContent = CONFIG.VERSION;
+        });
+    </script>
 </body>
 </html>
