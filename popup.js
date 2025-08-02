@@ -79,6 +79,37 @@ function Question(ver, guess, col) {
     return Ans;
 }
 function extractNumbers() {
+    const generateUUID = () => {
+    let e = new Date().getTime();
+    let t = (typeof performance !== "undefined" && performance.now && 1e3 * performance.now()) || 0;
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (n) {
+      let r = 16 * Math.random();
+      if (e > 0) {
+        r = (e + r) % 16 | 0;
+        e = Math.floor(e / 16);
+      } else {
+        r = (t + r) % 16 | 0;
+        t = Math.floor(t / 16);
+      }
+      return (n === "x" ? r : (r & 0x3) | 0x8).toString(16);
+    });
+  };
+    window.turing_game_uuid = window.turing_game_uuid || generateUUID();
+    console.log("Generating UUID:", window.turing_game_uuid);
+
+    fetch(`https://turingmachine.info/api/api.php?h=${encodeURIComponent("B5V VGO")}&uuid=${window.turing_game_uuid}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "ok") {
+          console.log("Réponse OK :", data);
+          // utiliser les données reçues (data.fake, data.ind, etc.)
+        } else if (data.status === "bad") {
+          console.error("Hash incorrect !");
+        }
+      })
+      .catch(err => {
+        console.error("Erreur réseau :", err);
+      });
     const userText = prompt("Paste the problem here:");
     var text = userText;
 
