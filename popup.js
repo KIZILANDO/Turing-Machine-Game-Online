@@ -222,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const notesheet = document.getElementById("notesheet-img");
     
-    // Utiliser extractNumbers() de manière asynchrone
     extractNumbers().then(info => {
         let ver = info.verifiers[0];
         let guessCount = 0;
@@ -482,13 +481,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }).catch(error => {
         console.error("Erreur lors de l'extraction des données:", error);
-        // Fallback avec des données par défaut
         const info = {
             verifiers: [387, 293, 537, 315, 516],
             criteria: [3, 14, 17, 19, 20],
             colour: 0,
             code: "DEFAULT"
         };
-        // Répéter le même code d'initialisation ici ou créer une fonction
     });
 });
