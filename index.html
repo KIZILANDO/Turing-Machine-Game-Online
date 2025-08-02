@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Extractor Extension</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <script src="popup.js"></script>
+    <script src="html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="notesheet-container">
+            <canvas id="draw-canvas" width="500" height="300"></canvas>
+            <button id="clear-canvas" width="20" height="20"></button>
+            <label for="guess">Guess:</label>
+            <input type="text" id="guess">
+            <select id="verifier-select">
+                <option value="0">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+                <option value="3">D</option>
+                <option id="optionE" value="4">E</option>
+                <option id="optionF" value="5">F</option>
+            </select>
+            <button id="submit-button">Submit</button>
+            <img id="Ans" src="img/other/PaperTextureSmall.png" alt="Small Image" width="20" height="20">
+            <button id="save-canvas"></button>
+
+            <img id="notesheet-img" src="img/other/notesheet.png">
+            <div id="Code" style="font-family: Arial, sans-serif; font-size: 18px;"></div>
+            <div id="Name" style="font-family: Arial, sans-serif; font-size: 18px;"></div>
+            <div class="criteria">
+                <img id="criteria0" width="162" height="105">
+                <img id="criteria1" width="162" height="105">
+                <img id="criteria2" width="162" height="105">
+                <img id="criteria3" width="162" height="105">
+                <img id="criteria4" width="162" height="105">
+                <img id="criteria5" width="162" height="105">
+            
+            </div>
+        </div>
+    </div>
+</body>
+</html>
