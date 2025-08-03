@@ -80,6 +80,31 @@ label {
     height: 105px;
 }
 
+/* Container principal avec flexbox */
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Section de gauche - notesheet */
+#notesheet-container {
+    flex: 1;
+    min-width: 600px;
+}
+
+/* Section de droite - Test a Code */
+.mainTab.pageInputCode {
+    flex: 0 0 300px; /* Largeur fixe de 300px */
+    color: #000000;
+    margin: 5px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
 .container {
     width: 100%;
     height: 100%;
@@ -89,10 +114,6 @@ label {
 
 h1 {
     margin-top: 0;
-}
-
-#notesheet-container {
-    position: relative;
 }
 
 #notesheet-img {
@@ -142,4 +163,440 @@ textarea[id="name"] {
     background-color: transparent;
     box-shadow: none;
     outline: none;
+}
+div.mainTab.pageInputCode {
+    body, *{
+    box-sizing: border-box;
+    font-family: Arial;
+    font-weight: bold;
+    }
+
+    .mainTab{
+    margin-bottom: 100px;
+    padding-bottom: 100px;
+    }
+
+    #root{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 100%;
+    }
+
+    @media only screen and (min-width: 400px) {
+    #root{
+        position: relative;
+        width: 400px;
+        margin: auto;
+    }
+    }
+
+    .App{
+    height: 100vh;
+    }
+
+    h2{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 37px;
+    }
+
+    p{
+    text-align: center;
+    line-height: 1.7em;
+    }
+    .App{
+    padding: 1.5vh;
+    }
+
+    .error{
+    color: #d01B1b;
+    font-weight: bold;
+    }
+
+    input[type=text]{
+    border:none;
+    background: #ececec;
+    text-align: center;
+    width: 85%;
+    height: 30px;
+    border-radius: 15px;
+    padding: 5px;
+    }
+    input[type=text]:focus{
+    border-color: red;
+    }
+
+    input[type=text].bigInput{
+    height: 60px;
+    border-radius: 40px;
+    padding: 20px;
+    font-size: 30px;
+    }
+
+    .button,
+    input[type=button]{
+    display: block;
+    background: none;
+    border: 2px solid black;
+    border-radius: 20px;
+    height: 40px;
+    line-height: 30px;
+    width: 85%;
+    padding: 0 10px;
+    margin: 10px auto;
+    color: black;
+    font-weight: bolder;
+    text-transform: uppercase;
+    text-align: center;
+    }
+    .button,
+    input[type=button]:hover{
+    cursor: pointer;
+    }
+    .button.fit{
+    width: fit-content;
+    }
+    a.button{
+    line-height: 38px;
+    }
+    a.button.green,
+    input[type=button].green{ color: #2db563; border-color: #2db563;}
+    a.button.green:hover,
+    input[type=button].green:hover{ color:#ffffff; background: #2db563; border-color: #2db563;}
+    a.button.blue,
+    input[type=button].blue{ color: #58b3da; border-color: #58b3da;}
+    a.button.blue:hover,
+    input[type=button].blue:hover{ color: #ffffff; background: #58b3da; border-color: #58b3da;}
+    a.button.yellow,
+    input[type=button].yellow{ color: #febc12; border-color: #febc12;}
+    a.button.yellow:hover,
+    input[type=button].yellow:hover{ color: #ffffff; background: #febc12; border-color: #febc12;}
+    a.button.orange,
+    input[type=button].orange{ color: #f39304 ; border-color: #f39304 ;}
+    a.button.orange:hover,
+    input[type=button].orange:hover{ color: #ffffff; background: #f39304 ; border-color: #f39304 ;}
+    a.button.purple,
+    input[type=button].purple{ color: #7f66ad; border-color: #7f66ad;}
+    a.button.purple:hover,
+    input[type=button].purple:hover{ color: #ffffff; background: #7f66ad; border-color: #7f66ad;}
+    input[type=button].grey{ color: #000000; background: #ececec; border-color: #ececec;}
+    input[type=button].grey:hover{ background: #cccccc; border-color: #cccccc;}
+    input[type=button][disabled].grey{background: #ececec; border-color: #ececec; color: #777777}
+    input[type=button][disabled].grey:hover{background: #ececec; border-color: #ececec; color: #656565}
+    a.button.fullgreen,
+    input[type=button].fullgreen{ background: #2db563; color:#ffffff; border-color: #2db563;}
+    a.button.fullgreen:hover,
+    input[type=button].fullgreen:hover{ color:#ffffff; background: #1e8b49; border-color: #1e8b49;}
+    input[type=button].fullblack{ background: #000000; color:#ffffff; border-color: #000000;}
+    input[type=button].white{ background: #ffffff; color:#000000; border-color: #cecece; border-width: 1px}
+
+    .button.white{
+    height: 35px;
+    line-height: 33px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 12px;
+    background: #ffffff; color: #656565; border-color: #cecece; border-width: 1px
+    }
+
+    .button.white.minus,
+    .button.white.plus
+    {
+    padding-left: 35px;
+    position:relative;
+    }
+
+    .button.white.minus::after,
+    .button.white.plus::after{
+    content: ' ';
+    display: block;
+    background: #000000;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: normal;
+    top: 7px;
+    left: 9px;
+    color: #ffffff;
+    }
+
+    .button.white.minus::after{
+    content: '-';
+    line-height: 16px;
+    }
+    .button.white.plus::after{content: '+'}
+
+    input[type=button].inline{
+    display: inline-block;
+    width: auto;
+    line-height: 30px;
+    height: 30px;
+    font-size: 12px;
+    }
+    h2 input[type=button].inline{
+    transform: translateY(-7px);
+    }
+
+    .header{
+    padding: 5px;
+    }
+
+    .header .home{
+    cursor: pointer;
+    }
+
+    a{
+    color: #000000;
+    font-weight: bold;
+    }
+
+
+    .label{
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    }
+
+    .radioGroup{
+    background: #ececec;
+    width: 85%;
+    padding: 0px;
+    display: flex;
+    margin: 0 auto 30px;
+    border-radius: 25px;
+    }
+    .radioGroup.small{
+    width: 40%;
+    background: none;
+    }
+    .radioGroup.clear{
+    background: none;
+    }
+
+    .radioGroup input[type=button]{
+    display: inline-block;
+    margin: 3px;
+    font-size: 11px;
+
+    }
+    .radioGroup input[type=button].active{
+    color:#ffffff;
+    background: #2db563;
+    border-color: #2db563;
+    }
+
+    .radioGroup input[type=button].inactive{
+    background: none;
+    border: none;
+    color: #000000;
+    }
+
+
+    /* footer with backlink*/
+    .footer{
+    margin: 0;
+    width:100%;
+    max-width: 400px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 10px;
+    background: #ffffff;
+    }
+    .footer .backlink{
+    background-image: url("/img/other/larrow.png");
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: left;
+    width: auto;
+    display: inline;
+    padding-left: 20px;
+    cursor: pointer;
+    }
+
+    /* colored span of texts */
+    span.green{
+    background: #2db563;
+    border-radius: 5px;
+    padding:5px;
+    color: #ffffff;
+    }
+
+    /* shaped span for numbers */
+    span.square{
+    width: 50px;
+    height: 50px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    margin: 5px;
+    }
+
+    span.bigSquare{
+
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 27px;
+    font-weight: bold;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background: #ececec;
+    color: #000000;
+    margin: 5px;
+    }
+
+    /* Style pour les boutons de code */
+    .bigSquare {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    text-align: center;
+    line-height: 40px;
+    border: 2px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.bigSquare:hover {
+    transform: scale(1.1);
+    border-color: #999;
+}
+
+    .codeButtonColor0.active { 
+    color: #ffffff; 
+    background: #2db563;
+    border-color: #2db563;
+}
+.codeButtonColor1.active { 
+    color: #ffffff; 
+    background: #febc12;
+    border-color: #febc12;
+}
+.codeButtonColor2.active { 
+    color: #ffffff; 
+    background: #7f66ad;
+    border-color: #7f66ad;
+}
+
+/* Style pour l'affichage du code */
+.codeDisplayer {
+    background: #fff;
+    border: 2px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.codeDisplayer.code {
+    background: #e8f5e8;
+    border-color: #4caf50;
+}
+
+.codeDisplayer.wrongCode {
+    background: #ffebee;
+    border-color: #f44336;
+}
+
+.codeDisplayer.correctCode {
+    background: #e8f5e8;
+    border-color: #4caf50;
+}
+
+/* Style pour les formes colorées */
+.blueTriangle,
+.yellowSquare,
+.purpleCircle {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.blueTriangle {
+    background-image: url("/img/other/ico_bluetriangle.svg");
+}
+
+.yellowSquare {
+    background-image: url("/img/other/ico_yellowsquare.svg");
+}
+
+.purpleCircle {
+    background-image: url("/img/other/ico_purplecircle.svg");
+}
+
+/* Style pour le bouton VERIFY */
+.fullgreen {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.fullgreen:hover {
+    background: #45a049;
+}
+
+/* Style pour les messages */
+.codeMessage {
+    text-align: center;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.wrongCode {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.correctCode {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Style pour le footer */
+.footer {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.backlink {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.backlink:hover {
+    color: #333;
+    text-decoration: underline;
+}
 }
