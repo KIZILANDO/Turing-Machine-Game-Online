@@ -414,7 +414,7 @@ div.mainTab.pageInputCode {
     background: #ffffff;
     }
     .footer .backlink{
-    background-image: url("/img/other/larrow.png");
+    background-image: url("img/other/larrow.png");
     background-repeat: no-repeat;
     background-size: 15px;
     background-position: left;
@@ -537,15 +537,15 @@ div.mainTab.pageInputCode {
 }
 
 .blueTriangle {
-    background-image: url("/img/other/ico_bluetriangle.svg");
+    background-image: url("img/other/ico_bluetriangle.svg");
 }
 
 .yellowSquare {
-    background-image: url("/img/other/ico_yellowsquare.svg");
+    background-image: url("img/other/ico_yellowsquare.svg");
 }
 
 .purpleCircle {
-    background-image: url("/img/other/ico_purplecircle.svg");
+    background-image: url("img/other/ico_purplecircle.svg");
 }
 
 /* Style pour le bouton VERIFY */
