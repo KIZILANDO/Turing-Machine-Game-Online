@@ -91,6 +91,11 @@ function resetCode() {
     currentCode = '___';
     isCodeWrong = false;
     isCodeCorrect = false;
+    
+    // Remove active class from all buttons
+    const allButtons = document.querySelectorAll('.bigSquare');
+    allButtons.forEach(btn => btn.classList.remove('active'));
+    
     updateCodeDisplay();
 }
 
@@ -110,17 +115,28 @@ function initializeCodeButtons() {
                 digit = 2;
             }
             
+            // Remove active class from all buttons of the same digit (same color)
+            const sameColorButtons = document.querySelectorAll(`.codeButtonColor${digit}`);
+            sameColorButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
             setCodeDigit(number, digit);
         });
         
         // Add hover effects
         button.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.1)';
+            if (!this.classList.contains('active')) {
+                this.style.transform = 'scale(1.05)';
+            }
             this.style.cursor = 'pointer';
         });
         
         button.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
+            if (!this.classList.contains('active')) {
+                this.style.transform = 'scale(1)';
+            }
         });
     });
 }
