@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Extractor Extension</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <script src="config.js"></script>
+    <script src="popup.js"></script>
+    <script src="html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="notesheet-container">
+            <canvas id="draw-canvas" width="500" height="300"></canvas>
+            <button id="clear-canvas" width="20" height="20"></button>
+            <label for="guess">Guess:</label>
+            <input type="text" id="guess">
+            <select id="verifier-select">
+                <option value="0">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+                <option value="3">D</option>
+                <option id="optionE" value="4">E</option>
+                <option id="optionF" value="5">F</option>
+            </select>
+            <button id="submit-button">Submit</button>
+            <img id="Ans" src="img/other/PaperTextureSmall.png" alt="Small Image" width="20" height="20">
+            <button id="save-canvas"></button>
+
+            <img id="notesheet-img" src="img/other/notesheet.png">
+            <div id="Code" style="font-family: Arial, sans-serif; font-size: 18px;"></div>
+            <div id="Name" style="font-family: Arial, sans-serif; font-size: 18px;"></div>
+            <div class="criteria">
+                <img id="criteria0" width="162" height="105">
+                <img id="criteria1" width="162" height="105">
+                <img id="criteria2" width="162" height="105">
+                <img id="criteria3" width="162" height="105">
+                <img id="criteria4" width="162" height="105">
+                <img id="criteria5" width="162" height="105">
+            </div>
+        </div>
+        
+        <div class="mainTab pageInputCode">
+            <h2>Test a Code</h2>
+            <div class="codeDisplayer">Input your code</div>
+            <div class="">
+                <span class="blueTriangle"></span>
+                <span class="yellowSquare"></span>
+                <span class="purpleCircle"></span>
+            </div>
+            <div class="codeInserter">
+                <span class="bigSquare codeButtonColor0">5</span>
+                <span class="bigSquare codeButtonColor1">5</span>
+                <span class="bigSquare codeButtonColor2">5</span><br>
+                <span class="bigSquare codeButtonColor0">4</span>
+                <span class="bigSquare codeButtonColor1">4</span>
+                <span class="bigSquare codeButtonColor2">4</span><br>
+                <span class="bigSquare codeButtonColor0">3</span>
+                <span class="bigSquare codeButtonColor1">3</span>
+                <span class="bigSquare codeButtonColor2">3</span><br>
+                <span class="bigSquare codeButtonColor0">2</span>
+                <span class="bigSquare codeButtonColor1">2</span>
+                <span class="bigSquare codeButtonColor2">2</span><br>
+                <span class="bigSquare codeButtonColor0">1</span>
+                <span class="bigSquare codeButtonColor1">1</span>
+                <span class="bigSquare codeButtonColor2">1</span><br>
+            </div>
+            <div class="codeMessage">
+                <span class="wrongCode">&nbsp;</span>
+            </div>
+            <input class="fullgreen" type="button" value="VERIFY">
+        </div>
+        
+        <div id="version-info" style="position: fixed; bottom: 5px; right: 5px; font-size: 10px; color: #888; font-family: Arial, sans-serif;">
+            v<span id="version-number"></span>
+        </div>
+    </div>
+
+    <script>
+        // Afficher la version
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('version-number').textContent = CONFIG.VERSION;
+        });
+    </script>
+</body>
+</html>

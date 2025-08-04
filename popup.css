@@ -163,11 +163,12 @@ textarea[id="name"] {
     box-shadow: none;
     outline: none;
 }
-div.mainTab.pageInputCode {
+div.mainTab.pageInputCode,div.mainTab {
     body, *{
     box-sizing: border-box;
     font-family: Arial;
     font-weight: bold;
+    
     }
 
     .mainTab{
@@ -176,7 +177,8 @@ div.mainTab.pageInputCode {
     }
 
     #root{
-    position: absolute;
+    margin:auto;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -370,6 +372,9 @@ div.mainTab.pageInputCode {
     padding: 0px;
     display: flex;
     margin: 0 auto 30px;
+    justify-content: center;
+    gap:10px;
+    margin-bottom: 20px;
     border-radius: 25px;
     }
     .radioGroup.small{
@@ -561,6 +566,96 @@ div.mainTab.pageInputCode {
     color: #333;
     text-decoration: underline;
 }
+.mainPageImage{
+    width: 100%;
+    max-width: 600px;
+}
+
+h2{
+    margin-bottom: 80px;
+}
+
+a.button.homeButton,
+input[type=button].homeButton{
+    font-size: 16px;
+    font-weight: bold;
+
+    position: relative;
+}
+
+.new{
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    background: #f39304;
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 0 5px;
+    font-size: 10px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+a{
+    display: block;
+    width: 85%;
+    margin: 15px auto;
+    text-align: center;
+    font-size: 14px;
+}
+
+.separator{
+    width: 15%;
+    border-bottom: 1px solid #ececec;
+    margin: 20px  auto;
+}
+h2{
+    margin-bottom: 20px;
+}
+
+.mainTab{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.codeDisplayer{
+    height: 40px;
+}
+
+.pageInputCode .codeDisplayer.code .digit{
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    font-size: 30px;
+}
+
+.codeInserter{
+    margin: auto;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.codeMessage{
+    margin-bottom: 15px;
+}
+
+.wrongCode{
+    color: #d01B1b;
+    margin-bottom: 5px;
+}
+.correctCode{
+    color: #2db563;
+}
+
 
 }
 .main-container {

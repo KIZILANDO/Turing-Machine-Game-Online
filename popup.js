@@ -1,3 +1,7 @@
+let difficulty = 0;
+let verifiers_num = 5;
+let loaded = false;
+
 // Function to decode encoded strings
 function b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
@@ -215,15 +219,15 @@ function extractNumbers() {
             return (n === "x" ? r : (r & 0x3) | 0x8).toString(16);
         });
     };
-    
+    console.log("Extracting numbers...");
     window.turing_game_uuid = window.turing_game_uuid || generateUUID();
     console.log("Generating UUID:", window.turing_game_uuid);
     //const idGame = prompt("ID of the Problem:").replace('#', '');
-    return fetch(`http://localhost:3001/proxy?uuid=${window.turing_game_uuid}`, {})
+    return fetch(`https://proud-vitality-production.up.railway.app/proxy?uuid=${window.turing_game_uuid}&difficulty=${difficulty}&verifiers=${verifiers_num}`, {})
         .then(response => response.json())
         .then(data => {
             if (data.status === "ok") {
-                console.log("Réponse OK :", data);
+                console.log(data);
                 let info = { 
                     verifiers: data.crypt, 
                     criteria: data.ind, 
@@ -251,7 +255,6 @@ function extractNumbers() {
 
 // Loads the images for the criteria
 function loadCriteria(criteriaNumbers, Reference) {
-
     // Remove criteria where appropriate
     if (criteriaNumbers.length == 5) {
         document.getElementById("criteria5").remove();
@@ -260,6 +263,8 @@ function loadCriteria(criteriaNumbers, Reference) {
     if (criteriaNumbers.length == 4) {
         document.getElementById("criteria4").remove();
         document.getElementById("optionE").remove();
+        document.getElementById("criteria5").remove();
+        document.getElementById("optionF").remove();
     }
 
     // Load correct image and set the correct position for criteria cards
@@ -340,7 +345,7 @@ function loadCriteria(criteriaNumbers, Reference) {
 
 // What happens once the popup loads?
 document.addEventListener("DOMContentLoaded", function () {
-    
+    loadConfig();
     // Initialize code button functionality
     initializeCodeButtons();
     
@@ -437,7 +442,6 @@ document.addEventListener("DOMContentLoaded", function () {
             resultElement.style.width = '19px';
             resultElement.style.height = '19px';
             resultElement.style.zIndex = '10';
-            resultElement.crossOrigin = "anonymous";
             resultElement.id = `result-${currentGuessRow}-verifier-${verifierIndex}`;
             
             document.body.appendChild(resultElement);
@@ -447,7 +451,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let canvas = document.getElementById('draw-canvas');
         canvas.style.position = "absolute";
         canvas.style.left = "420px";
-        canvas.style.top = "150px";
+        canvas.style.top = "180px";
         canvas.width="150";
         canvas.height="230";
         const ctx = canvas.getContext('2d');
@@ -601,3 +605,34 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     });
 });
+
+function loadConfig() {
+    const gameConfigStr = localStorage.getItem('gameConfig');
+    
+    if (gameConfigStr) {
+        const gameConfig = JSON.parse(gameConfigStr);
+        
+        console.log('Configuration du jeu récupérée:', gameConfig);
+
+        if (gameConfig.difficulty === 'Easy') {
+            difficulty = 0;
+        } else if (gameConfig.difficulty === 'Standard ') {
+            difficulty = 1;
+        } else if (gameConfig.difficulty === 'Hard') {
+            difficulty = 2;
+    }
+    verifiers_num = parseInt(gameConfig.verifiers);
+    console.log("Difficulté:", difficulty);
+
+        localStorage.removeItem('gameConfig');
+    } else {
+        console.log('Aucune configuration trouvée, utilisation des paramètres par défaut');
+        const defaultConfig = {
+            gameType: 'Solo/Co-op',
+            mode: 'Classic',
+            difficulty: 'Standard',
+            verifiers: '5'
+        };
+    }
+}
+

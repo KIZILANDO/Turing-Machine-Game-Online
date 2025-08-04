@@ -6,12 +6,14 @@ const app = express();
 app.use(cors());
 
 app.get('/proxy', async (req, res) => {
-  const { uuid } = req.query;
-  if (!uuid) {
+  const { uuid, difficulty, verifiers } = req.query;
+  console.log('Received request with params:', { uuid, difficulty, verifiers });
+  if (!uuid || !difficulty || !verifiers) {
     return res.status(400).json({ status: 'bad', error: 'Missing params' });
   }
 
-  const url = `https://turingmachine.info/api/api.php?uuid=${encodeURIComponent(uuid)}&m=0&d=1&n=5`;
+
+  const url = `https://turingmachine.info/api/api.php?uuid=${encodeURIComponent(uuid)}&m=0&d=${difficulty}&n=${verifiers}`;
 
   try {
     const response = await axios.get(url, {
