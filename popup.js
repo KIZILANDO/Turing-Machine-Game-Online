@@ -224,7 +224,8 @@ function extractNumbers() {
         method: 'GET',
         headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Referer':'https://turingmachine-is.netlify.app/'
         }
     })
         .then(response => response.json())
