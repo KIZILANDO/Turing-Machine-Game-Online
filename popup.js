@@ -219,14 +219,7 @@ function extractNumbers() {
     window.turing_game_uuid = window.turing_game_uuid || generateUUID();
     console.log("Generating UUID:", window.turing_game_uuid);
     //const idGame = prompt("ID of the Problem:").replace('#', '');
-
-    return fetch(`https://turingmachine.info/api/api.php?h=B5V+VGO&uuid=${window.turing_game_uuid}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        }
-    })
+    return fetch(`http://localhost:3001/proxy?uuid=${window.turing_game_uuid}`, {})
         .then(response => response.json())
         .then(data => {
             if (data.status === "ok") {
