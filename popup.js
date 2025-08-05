@@ -737,15 +737,7 @@ function loadConfig() {
 
     localStorage.removeItem("gameConfig");
   } else {
-    console.log(
-      "Aucune configuration trouvée, utilisation des paramètres par défaut"
-    );
-    const defaultConfig = {
-      lang: "English",
-      mode: "Classic",
-      difficulty: "Standard",
-      verifiers: "5",
-      is_new: true,
-    };
+    console.log("No configuration found");
+    window.location.href = "index.html";
   }
 }

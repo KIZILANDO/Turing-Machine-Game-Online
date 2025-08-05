@@ -118,9 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       window.location.href = "game.html";
 
-      // Ici vous pouvez ajouter la logique pour charger le jeu avec cet ID
-      //localStorage.setItem('gameId', gameId);
-      //window.location.href = 'game.html';
     });
   }
 
