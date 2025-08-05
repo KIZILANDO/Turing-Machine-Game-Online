@@ -10,7 +10,14 @@
     <div class="container">
       <div id="notesheet-container">
         <label for="guess">Guess:</label>
-        <input type="text" id="guess" />
+        <input
+  type="text"
+  id="guess"
+  maxlength="3"
+  inputmode="numeric"
+  pattern="[1-5]{3}"
+  oninput="this.value = this.value.replace(/[^1-5]/g, '')"
+/>
         <select id="verifier-select">
           <option value="0">A</option>
           <option value="1">B</option>
@@ -122,15 +129,6 @@
     </div>
 
     <script>
-      // Afficher la version
-      document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("version-number").textContent = CONFIG.VERSION;
-      });
-    </script>
-  </body>
-</html>
-    <script>
-      // Afficher la version
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("version-number").textContent = CONFIG.VERSION;
         
@@ -143,6 +141,33 @@
           
           button.addEventListener('click', function() {
             cycleButtonState(this);
+          });
+        });
+
+        // Add click handlers for criteria cards
+        const criteriaCards = document.querySelectorAll('.criteria img');
+        
+        criteriaCards.forEach((card, index) => {
+          card.addEventListener('click', function() {
+            let guessInput = document.getElementById("guess");
+            console.log(`Selected criteria: ${index}, Guess: ${guessInput.value}`);
+            if (guessInput && guessInput.value.length === 3) {
+              const criteriaLetter = String.fromCharCode(65 + index); // A, B, C, D, E, F
+              
+              const verifierSelect = document.getElementById('verifier-select');
+              if (verifierSelect) {
+                verifierSelect.value = index;
+                
+                verifierSelect.dispatchEvent(new Event('change'));
+              }
+              
+              const submitButton = document.getElementById('submit-button');
+              if (submitButton) {
+                submitButton.click();
+              }
+            } else {
+              console.log('Veuillez entrer un guess de 3 chiffres avant de sélectionner un critère');
+            }
           });
         });
       });
@@ -201,3 +226,5 @@
         }
       }
     </script>
+  </body>
+</html>

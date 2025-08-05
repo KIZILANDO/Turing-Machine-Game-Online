@@ -32,32 +32,6 @@ label {
   font-weight: bold;
 }
 
-#clear-canvas {
-  background-color: transparent;
-  border: none;
-  border-radius: 10px;
-  position: absolute;
-  left: 50px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  background-image: url("img/other/Erase.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-#save-canvas {
-  background-color: transparent;
-  border: none;
-  border-radius: 10px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  background-image: url("img/other/save.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 #Ans {
   background-color: transparent;
   border: none;
@@ -68,13 +42,6 @@ label {
   background-image: url("img/other/PaperTextureSmall.png");
   background-repeat: no-repeat;
   background-position: center;
-}
-
-#draw-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
 }
 
 .criteria {
@@ -139,7 +106,7 @@ textarea {
 }
 
 .criteria img:hover {
-  transform: scale(3) !important;
+  transform: scale(2.5) !important;
   z-index: 10000;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
@@ -876,4 +843,10 @@ input[type="text"] {
   position: absolute;
   right: 0;
   top: 200px;
+}
+#verifier-select {
+  display: none;
+}
+#submit-button {
+  display: none;
 }
