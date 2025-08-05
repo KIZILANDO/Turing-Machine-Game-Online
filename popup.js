@@ -3,6 +3,8 @@ let verifiers_num = 5;
 let loaded = false;
 let playerName = '';
 let lang = 'English';
+let is_new = true;
+let hash='';
 
 // Function to decode encoded strings
 function b64DecodeUnicode(str) {
@@ -225,6 +227,7 @@ function extractNumbers() {
     window.turing_game_uuid = window.turing_game_uuid || generateUUID();
     console.log("Generating UUID:", window.turing_game_uuid);
     //const idGame = prompt("ID of the Problem:").replace('#', '');
+    if(is_new){
     return fetch(`https://proud-vitality-production.up.railway.app/proxy?uuid=${window.turing_game_uuid}&difficulty=${difficulty}&verifiers=${verifiers_num}`, {})
         .then(response => response.json())
         .then(data => {
@@ -253,6 +256,36 @@ function extractNumbers() {
                 code: idGame || "DEFAULT"
             };
         });
+    } else{
+        return fetch(`https://function-bun-production-de2c.up.railway.app/proxy?uuid=${window.turing_game_uuid}&h=${encodeURIComponent(hash.replace("#",""))}`, {})
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "ok") {
+                console.log(data);
+                let info = { 
+                    verifiers: data.crypt, 
+                    criteria: data.ind, 
+                    colour: data.color, 
+                    code: data.hash,
+                    solution:data.code
+                };
+                console.log(info);
+                return info;
+            } else if (data.status === "bad") {
+                console.error("Hash incorrect !");
+                throw new Error("Hash incorrect");
+            }
+        })
+        .catch(err => {
+            console.error("Erreur réseau :", err);
+            return {
+                verifiers: [387, 293, 537, 315, 516],
+                criteria: [3, 14, 17, 19, 20],
+                colour: 0,
+                code: idGame || "DEFAULT"
+            };
+        });
+    }
 }
 
 // Loads the images for the criteria
@@ -615,16 +648,21 @@ function loadConfig() {
         const gameConfig = JSON.parse(gameConfigStr);
         
         console.log('Configuration du jeu récupérée:', gameConfig);
+        if(gameConfig.is_new) {
+            if (gameConfig.difficulty === 'Easy') {
+                difficulty = 0;
+            } else if (gameConfig.difficulty === 'Standard ') {
+                difficulty = 1;
+            } else if (gameConfig.difficulty === 'Hard') {
+                difficulty = 2;
+            }    
+        verifiers_num = parseInt(gameConfig.verifiers);   
+        console.log("Difficulté:", difficulty); 
+}else{
+    is_new = false;
+    hash= gameConfig.code;
+}
 
-        if (gameConfig.difficulty === 'Easy') {
-            difficulty = 0;
-        } else if (gameConfig.difficulty === 'Standard ') {
-            difficulty = 1;
-        } else if (gameConfig.difficulty === 'Hard') {
-            difficulty = 2;
-    }
-    verifiers_num = parseInt(gameConfig.verifiers);
-    console.log("Difficulté:", difficulty);
     playerName = gameConfig.playerName;
     lang = gameConfig.lang;
     if(lang === 'French') {
@@ -641,7 +679,8 @@ function loadConfig() {
             lang: 'English',
             mode: 'Classic',
             difficulty: 'Standard',
-            verifiers: '5'
+            verifiers: '5',
+            is_new: true,
         };
     }
 }

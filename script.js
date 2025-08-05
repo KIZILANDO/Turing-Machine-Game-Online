@@ -19,19 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     radioGroups.forEach(group => {
         setupRadioGroup(group);
     });
+
     
-    const generateButton = document.querySelector('.fullgreen');
-    if (generateButton) {
-        generateButton.addEventListener('click', function() {
-            // Récupérer le nom du joueur
-            const playerNameInput = document.querySelector('.nameInput');
-            const playerName = playerNameInput ? playerNameInput.value.trim() || 'Player' : 'Player';
+    const generateButton = document.querySelector('input[value="GENERATE"]');
+    const loadButton = document.querySelector('input[value="LOAD"]');
+    const playerNameInput = document.querySelector('.nameInput');
+    const playerName = playerNameInput ? playerNameInput.value.trim() || 'Player' : 'Player';
+                const allRadioGroups = document.querySelectorAll('.radioGroup');
             
-            // Debug: vérifier chaque radioGroup directement
-            const allRadioGroups = document.querySelectorAll('.radioGroup');
-            console.log('Nombre de radioGroups trouvés:', allRadioGroups.length);
-            
-            // Nouvelle approche : parcourir directement les radioGroups
             const selections = [];
             allRadioGroups.forEach((group, index) => {
                 const activeButton = group.querySelector('.active');
@@ -50,13 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Pas assez de sélections trouvées');
                 return;
             }
+    if (generateButton) {
+        generateButton.addEventListener('click', function() {
+            
             
             const gameConfig = {
                 playerName: playerName,
                 lang: selections[0],
                 mode: selections[1],
                 difficulty: selections[2],
-                verifiers: selections[3]
+                verifiers: selections[3],
+                is_new: true
             };
             
             console.log('Game config:', gameConfig);
@@ -65,7 +64,35 @@ document.addEventListener('DOMContentLoaded', function() {
             
             window.location.href = 'game.html';
         });
-    }
+    } if(loadButton) {
+    loadButton.addEventListener('click', function() {
+        const gameIdInput = document.querySelector('.bigInput');
+        const gameId = gameIdInput ? gameIdInput.value.trim() : '';
+        
+        if (!gameId) {
+            console.error('Veuillez entrer un Game ID');
+            return;
+        }
+        
+        console.log('Game ID saisi:', gameId);
+        const gameConfig = {
+                playerName: playerName,
+                lang: selections[0],
+                code:gameId,
+                is_new: false
+            };
+            
+            console.log('Game config:', gameConfig);
+            
+            localStorage.setItem('gameConfig', JSON.stringify(gameConfig));
+            
+            window.location.href = 'game.html';
+        
+        // Ici vous pouvez ajouter la logique pour charger le jeu avec cet ID
+        //localStorage.setItem('gameId', gameId);
+        //window.location.href = 'game.html';
+    });
+}
     
     const backButton = document.getElementById('homeBut');
     if (backButton) {
