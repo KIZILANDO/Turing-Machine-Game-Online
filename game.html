@@ -10,14 +10,10 @@
     <div class="container">
       <div id="notesheet-container">
         <label for="guess">Guess:</label>
-        <input
-  type="text"
-  id="guess"
-  maxlength="3"
-  inputmode="numeric"
-  pattern="[1-5]{3}"
-  oninput="this.value = this.value.replace(/[^1-5]/g, '')"
-/>
+        <input type="text" id="guess" class="guessInput" maxlength="3" inputmode="numeric" pattern="[1-5]{3}" oninput="this.value = this.value.replace(/[^1-5]/g, '')" style="
+    position: relative;
+    right: 200px;
+">
         <select id="verifier-select">
           <option value="0">A</option>
           <option value="1">B</option>
@@ -46,7 +42,7 @@
           <!-- Row 2 -->
           <button class="notepad-button" data-row="4" data-col="0" style="position: absolute; top: 64px; left: 20px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
           <button class="notepad-button" data-row="4" data-col="1" style="position: absolute; top: 64px; left: 58px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
-          <button class="notepad-button" data-row="4" data-col="2" style="position: absolute; top: 64px; left: 96px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="4" data-col="2" style="position: absolute; top: 64px; left: 95px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
 
           <!-- Row 3 -->
           <button class="notepad-button" data-row="3" data-col="0" style="position: absolute; top: 100px; left: 20px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>

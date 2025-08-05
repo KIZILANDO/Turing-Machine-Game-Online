@@ -30,9 +30,12 @@ input[type="text"] {
 label {
   font-size: 16px;
   font-weight: bold;
+  right: 200px;
+  position: relative;
 }
 
 #Ans {
+    display:None;
   background-color: transparent;
   border: none;
   border-radius: 10px;
@@ -63,11 +66,10 @@ label {
 }
 
 .mainTab.pageInputCode {
-  flex: 0 0 300px;
+  flex: 0 0 825px;
   color: #000000;
   margin: 5px;
   padding: 20px;
-  background: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   height: fit-content;
@@ -672,6 +674,10 @@ div.mainTab {
 
   .codeDisplayer {
     height: 40px;
+    width:411px;
+    position: relative;
+    left:23%;
+    border-radius:20px
   }
 
   .pageInputCode .codeDisplayer.code .digit {
@@ -768,7 +774,6 @@ div.mainTab {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 input[type="text"] {
@@ -850,3 +855,12 @@ input[type="text"] {
 #submit-button {
   display: none;
 }
+input[type="text"].guessInput {
+    height: 22px;
+    width: 68px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background:#ececec
+  }
