@@ -1,250 +1,253 @@
 ﻿body {
-    width: 600px;
-    margin: 0;
-    padding: 0;
+  width: 600px;
+  margin: 0;
+  padding: 0;
 }
 
-button, select {
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+button,
+select {
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-button:hover, select:hover {
-    background-color: #0056b3;
+button:hover,
+select:hover {
+  background-color: #0056b3;
 }
 
 input[type="text"] {
-    width: 10%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+  width: 10%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 label {
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #clear-canvas {
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-    position:absolute;
-    left:50px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background-image: url("img/other/Erase.png");
-    background-repeat: no-repeat;
-    background-position: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-image: url("img/other/Erase.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #save-canvas {
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background-image: url("img/other/save.png");
-    background-repeat: no-repeat;
-    background-position: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-image: url("img/other/save.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #Ans {
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background-image: url("img/other/PaperTextureSmall.png");
-    background-repeat: no-repeat;
-    background-position: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-image: url("img/other/PaperTextureSmall.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #draw-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .criteria {
-    outline: none;
-    border: none;
-    width: 162px;
-    height: 105px;
+  outline: none;
+  border: none;
+  width: 162px;
+  height: 105px;
 }
 
 .container {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 #notesheet-container {
-    flex: 1;
-    min-width: 600px;
+  flex: 1;
+  min-width: 600px;
 }
 
 .mainTab.pageInputCode {
-    flex: 0 0 300px;
-    color: #000000;
-    margin: 5px;
-    padding: 20px;
-    background: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    height: fit-content;
+  flex: 0 0 300px;
+  color: #000000;
+  margin: 5px;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: fit-content;
 }
 
 .container {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #notesheet-img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 #notes-container {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 textarea {
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 10px
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 10px;
 }
 .criteria img {
-    transition: transform 0.3s ease, z-index 0.3s ease;
-    position: relative;
-    cursor: pointer;
+  transition: transform 0.3s ease, z-index 0.3s ease;
+  position: relative;
+  cursor: pointer;
 }
 
 .criteria img:hover {
-    transform: scale(3) !important;
-    z-index: 10000;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    position:relative
+  transform: scale(3) !important;
+  z-index: 10000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  position: relative;
 }
 
 textarea[id^="notes-"] {
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-    font-family: Arial, sans-serif;
-    background-color: transparent;
-    box-shadow: none;
-    outline: none;
-    color: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: Arial, sans-serif;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0.7);
 }
 textarea[id="name"] {
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-    font-family: Arial, sans-serif;
-    background-color: transparent;
-    box-shadow: none;
-    outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: Arial, sans-serif;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
 }
-div.mainTab.pageInputCode,div.mainTab {
-    body, *{
+div.mainTab.pageInputCode,
+div.mainTab {
+  body,
+  * {
     box-sizing: border-box;
     font-family: Arial;
     font-weight: bold;
-    
-    }
+  }
 
-    .mainTab{
+  .mainTab {
     margin-bottom: 100px;
     padding-bottom: 100px;
-    }
+  }
 
-    #root{
-    margin:auto;
+  #root {
+    margin: auto;
     position: relative;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     min-height: 100%;
-    }
+  }
 
-    @media only screen and (min-width: 400px) {
-    #root{
-        position: relative;
-        width: 400px;
-        margin: auto;
+  @media only screen and (min-width: 400px) {
+    #root {
+      position: relative;
+      width: 400px;
+      margin: auto;
     }
-    }
+  }
 
-    .App{
+  .App {
     height: 100vh;
-    }
+  }
 
-    h2{
+  h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 37px;
-    }
+  }
 
-    p{
+  p {
     text-align: center;
     line-height: 1.7em;
-    }
-    .App{
+  }
+  .App {
     padding: 1.5vh;
-    }
+  }
 
-    .error{
-    color: #d01B1b;
+  .error {
+    color: #d01b1b;
     font-weight: bold;
-    }
+  }
 
-    input[type=text]{
-    border:none;
+  input[type="text"] {
+    border: none;
     background: #ececec;
     text-align: center;
     width: 85%;
     height: 30px;
     border-radius: 15px;
     padding: 5px;
-    }
-    input[type=text]:focus{
+  }
+  input[type="text"]:focus {
     border-color: red;
-    }
+  }
 
-    input[type=text].bigInput{
+  input[type="text"].bigInput {
     height: 60px;
     border-radius: 40px;
     padding: 20px;
     font-size: 30px;
-    }
-    input[type=text].nameInput{
+  }
+  input[type="text"].nameInput {
     height: 45px;
     border-radius: 40px;
     padding: 20px;
     font-size: 25px;
-    }
+  }
 
-    .button,
-    input[type=button]{
+  .button,
+  input[type="button"] {
     display: block;
     background: none;
     border: 2px solid black;
@@ -258,67 +261,136 @@ div.mainTab.pageInputCode,div.mainTab {
     font-weight: bolder;
     text-transform: uppercase;
     text-align: center;
-    }
-    .button,
-    input[type=button]:hover{
+  }
+  .button,
+  input[type="button"]:hover {
     cursor: pointer;
-    }
-    .button.fit{
+  }
+  .button.fit {
     width: fit-content;
-    }
-    a.button{
+  }
+  a.button {
     line-height: 38px;
-    }
-    a.button.green,
-    input[type=button].green{ color: #2db563; border-color: #2db563;}
-    a.button.green:hover,
-    input[type=button].green:hover{ color:#ffffff; background: #2db563; border-color: #2db563;}
-    a.button.blue,
-    input[type=button].blue{ color: #58b3da; border-color: #58b3da;}
-    a.button.blue:hover,
-    input[type=button].blue:hover{ color: #ffffff; background: #58b3da; border-color: #58b3da;}
-    a.button.yellow,
-    input[type=button].yellow{ color: #febc12; border-color: #febc12;}
-    a.button.yellow:hover,
-    input[type=button].yellow:hover{ color: #ffffff; background: #febc12; border-color: #febc12;}
-    a.button.orange,
-    input[type=button].orange{ color: #f39304 ; border-color: #f39304 ;}
-    a.button.orange:hover,
-    input[type=button].orange:hover{ color: #ffffff; background: #f39304 ; border-color: #f39304 ;}
-    a.button.purple,
-    input[type=button].purple{ color: #7f66ad; border-color: #7f66ad;}
-    a.button.purple:hover,
-    input[type=button].purple:hover{ color: #ffffff; background: #7f66ad; border-color: #7f66ad;}
-    input[type=button].grey{ color: #000000; background: #ececec; border-color: #ececec;}
-    input[type=button].grey:hover{ background: #cccccc; border-color: #cccccc;}
-    input[type=button][disabled].grey{background: #ececec; border-color: #ececec; color: #777777}
-    input[type=button][disabled].grey:hover{background: #ececec; border-color: #ececec; color: #656565}
-    a.button.fullgreen,
-    input[type=button].fullgreen{ background: #2db563; color:#ffffff; border-color: #2db563;}
-    a.button.fullgreen:hover,
-    input[type=button].fullgreen:hover{ color:#ffffff; background: #1e8b49; border-color: #1e8b49;}
-    input[type=button].fullblack{ background: #000000; color:#ffffff; border-color: #000000;}
-    input[type=button].white{ background: #ffffff; color:#000000; border-color: #cecece; border-width: 1px}
+  }
+  a.button.green,
+  input[type="button"].green {
+    color: #2db563;
+    border-color: #2db563;
+  }
+  a.button.green:hover,
+  input[type="button"].green:hover {
+    color: #ffffff;
+    background: #2db563;
+    border-color: #2db563;
+  }
+  a.button.blue,
+  input[type="button"].blue {
+    color: #58b3da;
+    border-color: #58b3da;
+  }
+  a.button.blue:hover,
+  input[type="button"].blue:hover {
+    color: #ffffff;
+    background: #58b3da;
+    border-color: #58b3da;
+  }
+  a.button.yellow,
+  input[type="button"].yellow {
+    color: #febc12;
+    border-color: #febc12;
+  }
+  a.button.yellow:hover,
+  input[type="button"].yellow:hover {
+    color: #ffffff;
+    background: #febc12;
+    border-color: #febc12;
+  }
+  a.button.orange,
+  input[type="button"].orange {
+    color: #f39304;
+    border-color: #f39304;
+  }
+  a.button.orange:hover,
+  input[type="button"].orange:hover {
+    color: #ffffff;
+    background: #f39304;
+    border-color: #f39304;
+  }
+  a.button.purple,
+  input[type="button"].purple {
+    color: #7f66ad;
+    border-color: #7f66ad;
+  }
+  a.button.purple:hover,
+  input[type="button"].purple:hover {
+    color: #ffffff;
+    background: #7f66ad;
+    border-color: #7f66ad;
+  }
+  input[type="button"].grey {
+    color: #000000;
+    background: #ececec;
+    border-color: #ececec;
+  }
+  input[type="button"].grey:hover {
+    background: #cccccc;
+    border-color: #cccccc;
+  }
+  input[type="button"][disabled].grey {
+    background: #ececec;
+    border-color: #ececec;
+    color: #777777;
+  }
+  input[type="button"][disabled].grey:hover {
+    background: #ececec;
+    border-color: #ececec;
+    color: #656565;
+  }
+  a.button.fullgreen,
+  input[type="button"].fullgreen {
+    background: #2db563;
+    color: #ffffff;
+    border-color: #2db563;
+  }
+  a.button.fullgreen:hover,
+  input[type="button"].fullgreen:hover {
+    color: #ffffff;
+    background: #1e8b49;
+    border-color: #1e8b49;
+  }
+  input[type="button"].fullblack {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+  input[type="button"].white {
+    background: #ffffff;
+    color: #000000;
+    border-color: #cecece;
+    border-width: 1px;
+  }
 
-    .button.white{
+  .button.white {
     height: 35px;
     line-height: 33px;
     font-size: 14px;
     font-weight: bold;
     padding: 0 12px;
-    background: #ffffff; color: #656565; border-color: #cecece; border-width: 1px
-    }
+    background: #ffffff;
+    color: #656565;
+    border-color: #cecece;
+    border-width: 1px;
+  }
 
-    .button.white.minus,
-    .button.white.plus
-    {
+  .button.white.minus,
+  .button.white.plus {
     padding-left: 35px;
-    position:relative;
-    }
+    position: relative;
+  }
 
-    .button.white.minus::after,
-    .button.white.plus::after{
-    content: ' ';
+  .button.white.minus::after,
+  .button.white.plus::after {
+    content: " ";
     display: block;
     background: #000000;
     position: absolute;
@@ -331,93 +403,92 @@ div.mainTab.pageInputCode,div.mainTab {
     top: 7px;
     left: 9px;
     color: #ffffff;
-    }
+  }
 
-    .button.white.minus::after{
-    content: '-';
+  .button.white.minus::after {
+    content: "-";
     line-height: 16px;
-    }
-    .button.white.plus::after{content: '+'}
+  }
+  .button.white.plus::after {
+    content: "+";
+  }
 
-    input[type=button].inline{
+  input[type="button"].inline {
     display: inline-block;
     width: auto;
     line-height: 30px;
     height: 30px;
     font-size: 12px;
-    }
-    h2 input[type=button].inline{
+  }
+  h2 input[type="button"].inline {
     transform: translateY(-7px);
-    }
+  }
 
-    .header{
+  .header {
     padding: 5px;
-    }
+  }
 
-    .header .home{
+  .header .home {
     cursor: pointer;
-    }
+  }
 
-    a{
+  a {
     color: #000000;
     font-weight: bold;
-    }
+  }
 
-
-    .label{
+  .label {
     text-align: center;
     width: 100%;
     display: block;
     font-weight: bold;
     margin-bottom: 7px;
-    }
+  }
 
-    .radioGroup{
+  .radioGroup {
     background: #ececec;
     width: 85%;
     padding: 0px;
     display: flex;
     margin: 0 auto 30px;
     justify-content: center;
-    gap:10px;
+    gap: 10px;
     margin-bottom: 20px;
     border-radius: 25px;
-    }
-    .radioGroup.small{
+  }
+  .radioGroup.small {
     width: 40%;
     background: none;
-    }
-    .radioGroup.clear{
+  }
+  .radioGroup.clear {
     background: none;
-    }
+  }
 
-    .radioGroup input[type=button]{
+  .radioGroup input[type="button"] {
     display: inline-block;
     margin: 3px;
     font-size: 11px;
-
-    }
-    .radioGroup input[type=button].active{
-    color:#ffffff;
+  }
+  .radioGroup input[type="button"].active {
+    color: #ffffff;
     background: #2db563;
     border-color: #2db563;
-    }
+  }
 
-    .radioGroup input[type=button].inactive{
+  .radioGroup input[type="button"].inactive {
     background: none;
     border: none;
     color: #000000;
-    }
+  }
 
-
-    span.green{
+  span.green {
     background: #2db563;
     border-radius: 5px;
-    padding:5px;
+    padding: 5px;
     color: #ffffff;
-    }
+  }
 
-    span.square{
+  span.square {
     width: 50px;
     height: 50px;
     line-height: 40px;
@@ -426,10 +497,9 @@ div.mainTab.pageInputCode,div.mainTab {
     border-radius: 10px;
     border: 2px solid transparent;
     margin: 5px;
-    }
+  }
 
-    span.bigSquare{
-
+  span.bigSquare {
     width: 60px;
     height: 60px;
     line-height: 60px;
@@ -442,9 +512,9 @@ div.mainTab.pageInputCode,div.mainTab {
     background: #ececec;
     color: #000000;
     margin: 5px;
-    }
+  }
 
-    .bigSquare {
+  .bigSquare {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -456,30 +526,30 @@ div.mainTab.pageInputCode,div.mainTab {
     cursor: pointer;
     transition: all 0.2s ease;
     font-weight: bold;
-}
+  }
 
-.bigSquare:hover {
+  .bigSquare:hover {
     transform: scale(1.1);
     border-color: #999;
-}
+  }
 
-    .codeButtonColor0.active { 
-    color: #ffffff; 
+  .codeButtonColor0.active {
+    color: #ffffff;
     background: #67b7de;
     border-color: #67b7de;
-}
-.codeButtonColor1.active { 
-    color: #ffffff; 
+  }
+  .codeButtonColor1.active {
+    color: #ffffff;
     background: #febc12;
     border-color: #febc12;
-}
-.codeButtonColor2.active { 
-    color: #ffffff; 
+  }
+  .codeButtonColor2.active {
+    color: #ffffff;
     background: #7f66ad;
     border-color: #7f66ad;
-}
+  }
 
-.codeDisplayer {
+  .codeDisplayer {
     background: #fff;
     border: 2px solid #ddd;
     padding: 10px;
@@ -488,26 +558,26 @@ div.mainTab.pageInputCode,div.mainTab {
     border-radius: 4px;
     font-size: 18px;
     font-weight: bold;
-}
+  }
 
-.codeDisplayer.code {
+  .codeDisplayer.code {
     background: #e8f5e8;
     border-color: #4caf50;
-}
+  }
 
-.codeDisplayer.wrongCode {
+  .codeDisplayer.wrongCode {
     background: #ffebee;
     border-color: #f44336;
-}
+  }
 
-.codeDisplayer.correctCode {
+  .codeDisplayer.correctCode {
     background: #e8f5e8;
     border-color: #4caf50;
-}
+  }
 
-.blueTriangle,
-.yellowSquare,
-.purpleCircle {
+  .blueTriangle,
+  .yellowSquare,
+  .purpleCircle {
     width: 30px;
     height: 30px;
     display: inline-block;
@@ -515,21 +585,21 @@ div.mainTab.pageInputCode,div.mainTab {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-}
+  }
 
-.blueTriangle {
+  .blueTriangle {
     background-image: url("img/other/ico_bluetriangle.svg");
-}
+  }
 
-.yellowSquare {
+  .yellowSquare {
     background-image: url("img/other/ico_yellowsquare.svg");
-}
+  }
 
-.purpleCircle {
+  .purpleCircle {
     background-image: url("img/other/ico_purplecircle.svg");
-}
+  }
 
-.fullgreen {
+  .fullgreen {
     background: #4caf50;
     color: white;
     border: none;
@@ -540,56 +610,56 @@ div.mainTab.pageInputCode,div.mainTab {
     font-weight: bold;
     width: 100%;
     margin: 10px 0;
-}
+  }
 
-.fullgreen:hover {
+  .fullgreen:hover {
     background: #45a049;
-}
+  }
 
-.codeMessage {
+  .codeMessage {
     text-align: center;
     padding: 5px;
     margin: 5px 0;
-}
+  }
 
-.wrongCode {
+  .wrongCode {
     color: #f44336;
     font-weight: bold;
-}
+  }
 
-.correctCode {
+  .correctCode {
     color: #4caf50;
     font-weight: bold;
-}
+  }
 
-.backlink {
+  .backlink {
     color: #666;
     text-decoration: none;
     font-size: 14px;
-}
+  }
 
-.backlink:hover {
+  .backlink:hover {
     color: #333;
     text-decoration: underline;
-}
-.mainPageImage{
+  }
+  .mainPageImage {
     width: 100%;
     max-width: 600px;
-}
+  }
 
-h2{
+  h2 {
     margin-bottom: 80px;
-}
+  }
 
-a.button.homeButton,
-input[type=button].homeButton{
+  a.button.homeButton,
+  input[type="button"].homeButton {
     font-size: 16px;
     font-weight: bold;
 
     position: relative;
-}
+  }
 
-.new{
+  .new {
     position: absolute;
     right: 5px;
     top: 8px;
@@ -600,26 +670,26 @@ input[type=button].homeButton{
     font-size: 10px;
     line-height: 20px;
     font-weight: normal;
-}
+  }
 
-a{
+  a {
     display: block;
     width: 85%;
     margin: 15px auto;
     text-align: center;
     font-size: 14px;
-}
+  }
 
-.separator{
+  .separator {
     width: 15%;
     border-bottom: 1px solid #ececec;
-    margin: 20px  auto;
-}
-h2{
+    margin: 20px auto;
+  }
+  h2 {
     margin-bottom: 20px;
-}
+  }
 
-.mainTab{
+  .mainTab {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -631,38 +701,36 @@ h2{
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-}
+  }
 
-.codeDisplayer{
+  .codeDisplayer {
     height: 40px;
-}
+  }
 
-.pageInputCode .codeDisplayer.code .digit{
+  .pageInputCode .codeDisplayer.code .digit {
     display: inline-block;
     text-align: center;
     width: 50px;
     font-size: 30px;
-}
+  }
 
-.codeInserter{
+  .codeInserter {
     margin: auto;
     margin-bottom: 15px;
     display: inline-block;
-}
+  }
 
-.codeMessage{
+  .codeMessage {
     margin-bottom: 15px;
-}
+  }
 
-.wrongCode{
-    color: #d01B1b;
+  .wrongCode {
+    color: #d01b1b;
     margin-bottom: 5px;
-}
-.correctCode{
+  }
+  .correctCode {
     color: #2db563;
-}
-
-
+  }
 }
 .main-container {
   display: flex;
@@ -720,7 +788,7 @@ h2{
   max-width: 350px;
   height: 50px;
   border-radius: 25px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -741,71 +809,71 @@ input[type="text"] {
 }
 
 .nameInputGroup .codeInputGroup {
-    background: #ececec;
-    width: 85%;
-    padding: 0px;
-    display: flex;
-    margin: 0 auto 30px;
-    justify-content: center;
-    border-radius: 25px;
+  background: #ececec;
+  width: 85%;
+  padding: 0px;
+  display: flex;
+  margin: 0 auto 30px;
+  justify-content: center;
+  border-radius: 25px;
 }
 
-.nameInput .codeInput{
-    width: 100%;
-    padding: 12px 20px;
-    border: none;
-    background: none;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    outline: none;
-    color: #000000;
-    border-radius: 25px;
+.nameInput .codeInput {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  outline: none;
+  color: #000000;
+  border-radius: 25px;
 }
-.codeInput{
-    position:relative;
-    left:1200px;
-    top:230px;
+.codeInput {
+  position: relative;
+  left: 1200px;
+  top: 230px;
 }
 .orSection {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-    padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  padding: 0 20px;
 }
 
 .orText {
-    font-size: 90px;
-    font-weight: bold;
-    font-family: Arial;
-    color: black;
-    bottom: 300px;
-    left: 600px;
-    position: relative;
+  font-size: 90px;
+  font-weight: bold;
+  font-family: Arial;
+  color: black;
+  bottom: 300px;
+  left: 600px;
+  position: relative;
 }
 
 .codeInputGroup {
-    flex: 1;
-    max-width: 200px;
+  flex: 1;
+  max-width: 200px;
 }
 
 .codeInput {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    text-align: center;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
 }
 
 .codeInput:focus {
-    outline: none;
-    border-color: #4CAF50;
+  outline: none;
+  border-color: #4caf50;
 }
 .mainTab.pageSearch {
-    position: absolute;
-    right: 0;
-    top: 200px;
+  position: absolute;
+  right: 0;
+  top: 200px;
 }

@@ -1,70 +1,67 @@
-<link rel="stylesheet" type="text/css" href="popup.css">
+<link rel="stylesheet" type="text/css" href="popup.css" />
 
-<div class="mainTab" style="
-    top: 30px;
-    position: relative;
-">
-    <h2>Play</h2>
-    
-    <label class="label">Player Name</label>
-    <div class="nameInputGroup">
-    <input type="text" class="nameInput" placeholder="" maxlength="20" style="position: relative;left: 50px;width: 80%;">
+<div class="mainTab" style="top: 30px; position: relative">
+  <h2>Play</h2>
+
+  <label class="label">Player Name</label>
+  <div class="nameInputGroup">
+    <input
+      type="text"
+      class="nameInput"
+      maxlength="12"
+      style="position: relative; left: 50px; width: 80%"
+    />
 
     <label class="label">Lang</label>
     <div class="radioGroup">
-        <input type="button" class="inactive" value="English" /><input
-            type="button"
-            class="active"
-            value="French"
-        />
-    </div>
-    
-    <label class="label">Mode</label>
-    <div class="radioGroup">
-        <input type="button" class="active" value="Classic" /><input
-            type="button"
-            class="inactive"
-            value="Extreme"
-        /><input type="button" class="inactive" value="Nightmare" />
-    </div>
-    
-    <label class="label">Difficulty</label>
-    <div class="radioGroup">
-        <input type="button" class="inactive" value="Easy" /><input
-            type="button"
-            class="active"
-            value="Standard "
-        /><input type="button" class="inactive" value="Hard" />
-    </div>
-    
-    <label class="label">Verifiers</label>
-    <div class="radioGroup">
-        <input type="button" class="inactive" value="4" /><input
-            type="button"
-            class="active"
-            value="5"
-        /><input type="button" class="inactive" value="6" />
-    </div>
-        </div>
-    
-    <input class="fullgreen" type="button" value="GENERATE" />
+      <input type="button" class="inactive" value="English" /><input
+        type="button"
+        class="active"
+        value="French"
+      />
     </div>
 
+    <label class="label">Mode</label>
+    <div class="radioGroup">
+      <input type="button" class="active" value="Classic" /><input
+        type="button"
+        class="inactive"
+        value="Extreme"
+      /><input type="button" class="inactive" value="Nightmare" />
+    </div>
+
+    <label class="label">Difficulty</label>
+    <div class="radioGroup">
+      <input type="button" class="inactive" value="Easy" /><input
+        type="button"
+        class="active"
+        value="Standard "
+      /><input type="button" class="inactive" value="Hard" />
+    </div>
+
+    <label class="label">Verifiers</label>
+    <div class="radioGroup">
+      <input type="button" class="inactive" value="4" /><input
+        type="button"
+        class="active"
+        value="5"
+      /><input type="button" class="inactive" value="6" />
+    </div>
+  </div>
+
+  <input class="fullgreen" type="button" value="GENERATE" />
+</div>
+
 <div class="orSection">
-    <div class="orText">OR</div>
-    
+  <div class="orText">OR</div>
 </div>
 <div class="mainTab pageSearch">
   <p>Input Game ID</p>
-  <input type="text" class="bigInput" style="
-    left: 30px;
-    position: relative;
-"><input
-    type="button"
-    class="fullgreen"
-    value="LOAD"
-  />
+  <input
+    type="text"
+    class="bigInput"
+    style="left: 30px; position: relative"
+  /><input type="button" class="fullgreen" value="LOAD" />
 </div>
-
 
 <script src="script.js"></script>
