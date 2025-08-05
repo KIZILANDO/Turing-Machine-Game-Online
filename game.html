@@ -5,13 +5,10 @@
     <link rel="stylesheet" type="text/css" href="popup.css" />
     <script src="config.js"></script>
     <script src="popup.js"></script>
-    <script src="html2canvas.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div id="notesheet-container">
-        <canvas id="draw-canvas" width="500" height="300"></canvas>
-        <button id="clear-canvas" width="20" height="20"></button>
         <label for="guess">Guess:</label>
         <input type="text" id="guess" />
         <select id="verifier-select">
@@ -30,9 +27,36 @@
           width="20"
           height="20"
         />
-        <button id="save-canvas"></button>
 
         <img id="notesheet-img" src="img/other/notesheet.png" />
+        
+        <div id="notepad-overlay" style="position: relative; bottom: 559px;left: 408px;width: 127px;height: 210px;pointer-events: none;">
+          <!-- Row 1 (top) -->
+          <button class="notepad-button" data-row="5" data-col="0" style="position: absolute;top: 26px;left: 20px;width: 4px;height: 17px;background: transparent;border: none;cursor: pointer;pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="5" data-col="1" style="position: absolute;top: 26px;left: 58px;width: 4px;height: 17px;background: transparent;border: none;cursor: pointer;pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="5" data-col="2" style="position: absolute;top: 26px;left: 96px;width: 4px;height: 17px;background: transparent;border: none;cursor: pointer;pointer-events: auto;"></button>
+          
+          <!-- Row 2 -->
+          <button class="notepad-button" data-row="4" data-col="0" style="position: absolute; top: 64px; left: 20px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="4" data-col="1" style="position: absolute; top: 64px; left: 58px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="4" data-col="2" style="position: absolute; top: 64px; left: 96px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+
+          <!-- Row 3 -->
+          <button class="notepad-button" data-row="3" data-col="0" style="position: absolute; top: 100px; left: 20px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="3" data-col="1" style="position: absolute; top: 100px; left: 58px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="3" data-col="2" style="position: absolute; top: 100px; left: 96px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+
+          <!-- Row 4 -->
+          <button class="notepad-button" data-row="2" data-col="0" style="position: absolute; top: 137px; left: 20px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="2" data-col="1" style="position: absolute; top: 137px; left: 58px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="2" data-col="2" style="position: absolute; top: 137px; left: 96px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+
+          <!-- Row 5 (bottom) -->
+          <button class="notepad-button" data-row="1" data-col="0" style="position: absolute; top: 173px; left: 20px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="1" data-col="1" style="position: absolute; top: 173px; left: 58px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+          <button class="notepad-button" data-row="1" data-col="2" style="position: absolute; top: 173px; left: 96px; width: 4px; height: 17px; background: transparent; border: none; cursor: pointer; pointer-events: auto;"></button>
+        </div>
+        
         <div
           id="Code"
           style="font-family: Arial, sans-serif; font-size: 18px"
@@ -105,3 +129,75 @@
     </script>
   </body>
 </html>
+    <script>
+      // Afficher la version
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("version-number").textContent = CONFIG.VERSION;
+        
+        // Add click handlers for notepad buttons
+        const notepadButtons = document.querySelectorAll('.notepad-button');
+        
+        notepadButtons.forEach(button => {
+          // Initialize state
+          button.dataset.state = 'empty'; // empty, slash, circle
+          
+          button.addEventListener('click', function() {
+            cycleButtonState(this);
+          });
+        });
+      });
+      
+      function cycleButtonState(button) {
+        const currentState = button.dataset.state;
+        const row = button.dataset.row;
+        const col = button.dataset.col;
+        
+        const corrections = {
+          '5': {
+            slash: { right: '3px', bottom: '6px' },
+            circle: { right: '14px', bottom: '7px' }
+          },
+          '4': {
+            slash: { right: '3px', bottom: '9px' },
+            circle: { right: '14px', bottom: '7px' }
+          },
+          '3': {
+            slash: { right: '3px', bottom: '7px' },
+            circle: { right: '15px', bottom: '7px' }
+          },
+          '2': {
+            slash: { right: '3px', bottom: '6px' },
+            circle: { right: '15px', bottom: '7px' }
+          },
+          '1': {
+            slash: { right: '3px', bottom: '4px' },
+            circle: { right: '15px', bottom: '7px' }
+          }
+        };
+        
+        // Clear current content
+        button.innerHTML = '';
+        
+        const correction = corrections[row] || corrections['4']; // fallback
+        
+        switch(currentState) {
+          case 'empty':
+            // Show slash
+            button.innerHTML = `<span style="font-size: 26px; color: black; font-weight: bold; position:relative; right:${correction.slash.right}; bottom:${correction.slash.bottom};">/</span>`;
+            button.dataset.state = 'slash';
+            break;
+          case 'slash':
+            // Show circle
+            button.innerHTML = `<svg style="width: 30px; height: 30px; color: black; position:relative; right:${correction.circle.right}; bottom:${correction.circle.bottom};" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"></path></svg>`;
+            button.dataset.state = 'circle';
+            break;
+          case 'circle':
+            // Show nothing
+            button.innerHTML = '';
+            button.dataset.state = 'empty';
+            break;
+          default:
+            button.dataset.state = 'empty';
+        }
+      }
+    </script>
