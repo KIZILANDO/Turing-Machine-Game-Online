@@ -1,6 +1,8 @@
 let difficulty = 0;
 let verifiers_num = 5;
 let loaded = false;
+let playerName = '';
+let lang = 'English';
 
 // Function to decode encoded strings
 function b64DecodeUnicode(str) {
@@ -278,9 +280,9 @@ function loadCriteria(criteriaNumbers, Reference) {
 
         // Load correct image
         if (criteriaNumbers[i] < 10) {
-            criteria.src = "img/criteria/TM_GameCards_FR-0" + criteriaNumbers[i] + ".png";
+            criteria.src = `img/criteria/TM_GameCards_${lang}-0` + criteriaNumbers[i] + ".png";
         } else {
-            criteria.src = "img/criteria/TM_GameCards_FR-" + criteriaNumbers[i] + ".png";
+            criteria.src = `img/criteria/TM_GameCards_${lang}-` + criteriaNumbers[i] + ".png";
         }
 
         // Place in correct position
@@ -366,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
         code.style.left = (notesheet.offsetLeft + 430) + "px";
         code.style.top = (notesheet.offsetTop + 40) + "px";
         const name = document.getElementById("Name");
-        name.innerText = "KIZILANDO";
+        name.innerText = playerName;
         name.style.position = "absolute";
         name.style.left = (notesheet.offsetLeft + 430) + "px";
         name.style.top = (notesheet.offsetTop +8) + "px";
@@ -623,12 +625,20 @@ function loadConfig() {
     }
     verifiers_num = parseInt(gameConfig.verifiers);
     console.log("Difficulté:", difficulty);
+    playerName = gameConfig.playerName;
+    lang = gameConfig.lang;
+    if(lang === 'French') {
+        lang = 'FR';
+    }
+    else if(lang === 'English') {
+        lang = 'EN';
+    }
 
         localStorage.removeItem('gameConfig');
     } else {
         console.log('Aucune configuration trouvée, utilisation des paramètres par défaut');
         const defaultConfig = {
-            gameType: 'Solo/Co-op',
+            lang: 'English',
             mode: 'Classic',
             difficulty: 'Standard',
             verifiers: '5'

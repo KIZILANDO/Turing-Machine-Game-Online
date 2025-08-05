@@ -733,3 +733,26 @@ h2{
 input[type="text"] {
   margin-bottom: 20px;
 }
+
+.nameInputGroup {
+    background: #ececec;
+    width: 85%;
+    padding: 0px;
+    display: flex;
+    margin: 0 auto 30px;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.nameInput {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    outline: none;
+    color: #000000;
+    border-radius: 25px;
+}
