@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const baseTop = notesheet.offsetTop + 130;
         const columnWidth = 32;
         const rowHeight = 28.5;
-        const columnAdjustments = [-30, -27, -23.5, -21, -18, -26];
+        const columnAdjustments = [-30, -27, -23.5, -21, -18, -14];
 
         const resultElement = document.createElement("img");
         resultElement.src = isCorrect ? "img/other/t.png" : "img/other/x.png";

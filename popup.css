@@ -135,7 +135,7 @@ textarea[id="name"] {
   outline: none;
 }
 div.mainTab.pageInputCode,
-div.mainTab {
+div.mainTab{
   body,
   * {
     box-sizing: border-box;
@@ -861,6 +861,5 @@ input[type="text"].guessInput {
     border-radius: 20px;
     text-align: center;
     font-size: 16px;
-    font-weight: bold;
-    background:#ececec
+    font-weight: bold;  
   }
